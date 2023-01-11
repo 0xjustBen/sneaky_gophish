@@ -49,10 +49,15 @@ RUN apt-get update && \
 
 WORKDIR /opt/gophish
 COPY --from=build-golang /go/src/github.com/gophish/gophish/ ./
+RUN true
 COPY --from=build-js /build/static/js/dist/ ./static/js/dist/
+RUN true
 COPY --from=build-js /build/static/css/dist/ ./static/css/dist/
+RUN true
 COPY --from=build-golang /go/src/github.com/gophish/gophish/config.json ./
+RUN true
 COPY ./files/404.html ./templates/
+RUN true
 RUN chown app. config.json
 
 RUN setcap 'cap_net_bind_service=+ep' /opt/gophish/gophish
